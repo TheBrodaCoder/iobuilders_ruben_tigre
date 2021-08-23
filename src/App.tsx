@@ -1,11 +1,11 @@
 import React from 'react';
 import './App.css';
-import Button from './components/utils/button/Button';
+import TextInput from './components/utils/TextInput/TextInput';
 
 const App = () => {
   return (
     <div className="App">
-      <Button text={'Log in!'} onClick={() => console.log('here i am')}/>
+      <TextInput placeholderText='username' name='username'/>
     </div>
   );
 }

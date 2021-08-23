@@ -8,16 +8,15 @@ interface buttonProps {
 }
 
 interface StyledButtonProps {
-    size: string
+    caution?: boolean,
 }
 
 const StyledButton = styled.button<StyledButtonProps>`
-    background: ${theme.mainColors.blue};
+    background: ${props => props.caution ? theme.mainColors.red : theme.mainColors.blue };
     color: ${theme.mainColors.white};
     border: none;
     border-radius: 4px;
     font: inherit;
-    cursor: pointer;
     outline: inherit;
     font-size: 1.2em;
     font-weight: 200;
@@ -28,7 +27,7 @@ const StyledButton = styled.button<StyledButtonProps>`
 
 const Button = ({ text, onClick }: buttonProps ): JSX.Element => {
     return (
-        <StyledButton size='2vw' onClick={onClick}>
+        <StyledButton onClick={onClick}>
             {text}
         </StyledButton>
     )
