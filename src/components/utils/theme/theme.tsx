@@ -5,7 +5,10 @@ const theme = {
         yellow: '#FCA311',
         gray: '#E5E5E5',
         white: '#FFFFFF',
-        red: '#E15656'
+        red: '#E15656',
+        darkBlue: '#14213D',
+        darkGray: '#292A28',
+        darkYellow: '#8D5801'
     }
 };
 

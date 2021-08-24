@@ -1,11 +1,11 @@
 import React from 'react';
 import './App.css';
-import TextInput from './components/utils/TextInput/TextInput';
+import LandingPage from './components/main/views/LandingPage/LandingPage';
 
 const App = () => {
   return (
     <div className="App">
-      <TextInput placeholderText='username' name='username'/>
+      <LandingPage/>
     </div>
   );
 }

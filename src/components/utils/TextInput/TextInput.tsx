@@ -1,31 +1,30 @@
-import React, { useState } from 'react';
-import { inputProps } from './requiredInterfaces';
-import { StyledDiv, StyledInput, StyledLabel } from './requiredStyledComponents';
+import { useField } from 'formik';
+import React from 'react';
+import { StyledInput } from './styledInput';
+import { InputHTMLAttributes } from 'react';
 
-const TextInput = ({placeholderText, name, } :inputProps ) => {
+interface inputProps extends InputHTMLAttributes<HTMLElement> {
+    name: string
+}
 
-    const [active, setActive] = useState(false);
-    const [value, setValue] = useState('');
+const TextInput = ({ name , ...props }: inputProps ): JSX.Element => {
+
+    const [field, meta, helpers] = useField(name);
+    const showError = meta.touched && meta.error;
     
-
-    const onChange = (e: React.ChangeEvent<
-        HTMLInputElement | HTMLTextAreaElement
-      >) => {
-        setValue(e.target.value)
-
-        if (value === '') {
-            setActive(false);
-        } else {
-            setActive(true);
-        }
-    }
-
     return (
-        <StyledDiv>
-            <StyledInput className={name} onChange={onChange} value={value}/>
-            <StyledLabel htmlFor={name} active={active} > { placeholderText } </StyledLabel>
-        </StyledDiv>
-    )
+        <>
+
+            <StyledInput
+                onChange={value => helpers.setValue(value)}
+                onBlur={() => helpers.setTouched(true)}
+                value={field.value}
+                error={showError}
+                {...props}
+            />
+            {showError && <div style={{ marginTop: 5, color: 'red',fontSize: 12}}>{meta.error}</div>}
+        </>
+    );
 };
 
 export default TextInput;
