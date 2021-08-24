@@ -50,7 +50,7 @@ const Button = ({ text, label, ...props }: buttonProps ): JSX.Element => {
     return (
         <ButtonContainer>
             {label ? (<StyledLabel>{label}</StyledLabel>):(null)}
-            <StyledButton onClick={props.onClick} {...props}>
+            <StyledButton {...props}>
                 {text}
             </StyledButton>
         </ButtonContainer>

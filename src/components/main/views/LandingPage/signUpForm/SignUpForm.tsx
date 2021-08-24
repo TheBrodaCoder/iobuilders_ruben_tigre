@@ -4,8 +4,11 @@ import TextInput from '../../../../utils/TextInput/TextInput';
 import { Formik } from 'formik';
 import Button from '../../../../utils/button/Button';
 
+interface SignUpProps {
+    handleFormChange( booleanValue: boolean): void 
+}
 
-const SignUpForm = () => {
+const SignUpForm: React.FC<SignUpProps> = ( props: SignUpProps) => {
 
     return (
         <Formik
@@ -60,8 +63,8 @@ const SignUpForm = () => {
                                     placeholder='Confirm password'
                                 />
                                 <div style={{ display: 'flex', justifyContent: 'space-around', width: '100%'}}>
-                                    <Button text='Log in!' type='submit' label="If you're already signed"/>
-                                    <Button text='Sign up!' type='button' onClick={() => console.log('sign up!') } label='If you have no account'/>
+                                    <Button text='Log in!' type='button' label="If you're already signed" onClick={() => props.handleFormChange(true)}/>
+                                    <Button text='Sign up!' type='submit' label='If you have no account'/>
                                 </div>
                             </form>
                            );
@@ -71,5 +74,6 @@ const SignUpForm = () => {
                 </Formik>
     )
 }
+
 
 export default SignUpForm;

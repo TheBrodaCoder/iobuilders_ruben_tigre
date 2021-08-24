@@ -3,14 +3,20 @@ import LoginForm from './loginForm/LoginForm'
 import theme from '../../../utils/theme/theme'
 import {ReactComponent as Bitcoin} from './bitcoin.svg'
 import SignUpForm from './signUpForm/SignUpForm';
+import { useState } from 'react';
 
 
-const LandingPage = () => {
+const LandingPage = (): JSX.Element => {
+    const [login, changeForm] = useState(true);
+
+    const changeFormToView = (): void => {
+        changeForm(!login);
+    }
 
     return (
         <div style={{display:"flex", flexDirection: 'row-reverse'}}>
             <div style={{backgroundColor: theme.mainColors.darkBlue, display: 'flex', flexDirection: 'column', height: '100vh', width: '30vw', alignItems: 'center'}}>
-                <SignUpForm/>
+                {login ? (<LoginForm handleFormChange={() => changeFormToView()}/>): (<SignUpForm handleFormChange={() => changeFormToView()}/>) }
             </div>
             <div style={{backgroundColor: theme.mainColors.darkGray, width: '70vw', display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
                 <div style={{backgroundColor: theme.mainColors.darkBlue, maxWidth: '60%', minHeight: '70%', borderRadius: '1em', display: 'flex', flexDirection:'column',  alignItems: 'center', justifyContent: 'center'}}>
