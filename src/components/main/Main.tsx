@@ -1,10 +1,11 @@
 import React from 'react'
 
 const main = () => {
+    
     return (
-        <div>
+        <>
             
-        </div>
+        </>
     )
 }
 

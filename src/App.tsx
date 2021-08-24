@@ -1,11 +1,11 @@
 import React from 'react';
 import './App.css';
-import LandingPage from './components/main/views/LandingPage/LandingPage';
+import HomePage from './components/main/views/HomePage/HomePage';
 
 const App = () => {
   return (
-    <div className="App">
-      <LandingPage/>
+    <div className="App" style={{overflow: 'hidden'}}>
+      <HomePage/>
     </div>
   );
 }
