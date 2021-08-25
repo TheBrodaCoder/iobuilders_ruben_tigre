@@ -22,8 +22,6 @@ const StyledBalance = styled.div<React.HTMLAttributes<HTMLDivElement>>`
 
 const AccountBalance: React.FC<AccountBalanceProps>= ( props: AccountBalanceProps ) => {
 
-
-
     return (
     
         <StyledBalance>

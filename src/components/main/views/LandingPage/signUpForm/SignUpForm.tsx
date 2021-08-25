@@ -8,8 +8,17 @@ interface SignUpProps {
     handleFormChange( booleanValue: boolean): void 
 }
 
+const generateWalletName = () => {
+    let walletName = '';
+    for (let i = 0; i < 16; i++ ) {
+        walletName += `${Math.floor((Math.random() * 16) - 1)}`;
+    }
+    return walletName;
+}
+
 const SignUpForm: React.FC<SignUpProps> = ( props: SignUpProps) => {
 
+    
     return (
         <Formik
             initialValues={{

@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components';
 import theme from '../../../../../../utils/theme/theme';
-import { MoveProps } from './interfaces';
+import { AccountMove } from './interfaces';
 
 const MoveContainer = styled.div<React.HTMLAttributes<HTMLDivElement>>`
     background-color: ${theme.mainColors.darkGray};
@@ -17,7 +17,7 @@ const MoveContainer = styled.div<React.HTMLAttributes<HTMLDivElement>>`
 
 
 
-const Move: React.FC<MoveProps> = ( props: MoveProps ) => {
+const Move: React.FC<AccountMove> = ( props: AccountMove ) => {
     return (
         <MoveContainer>
             <div style={{flexBasis: '50%', display: 'flex', flexDirection: 'row'}}>

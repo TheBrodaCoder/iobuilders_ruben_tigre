@@ -1,12 +1,15 @@
 import React from 'react';
 import './App.css';
-import HomePage from './components/main/views/HomePage/HomePage';
+import store from './store/store';
+import { Provider } from 'react-redux'
+import Main from './components/main/Main';
 
-const App = () => {
+
+const App = (): JSX.Element => {
   return (
-    <div className="App" style={{overflow: 'hidden'}}>
-      <HomePage/>
-    </div>
+    <Provider store={ store }>
+      <Main/>
+    </Provider>
   );
 }
 
