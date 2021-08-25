@@ -1,20 +1,21 @@
 import React from 'react'
-import { RootStateOrAny, useDispatch, useSelector } from 'react-redux'
-import { changeLoggedStatus } from '../../reducers/loggedSlice';
+import { RootStateOrAny, useSelector } from 'react-redux'
+import LandingPage from './views/LandingPage/LandingPage';
+import HomePage from './views/HomePage/HomePage';
 
 const Main = () => {
     
-    const logged = useSelector((state: RootStateOrAny ) => state.logged.logged );
-    const dispatch = useDispatch();
+    const logged = useSelector((state: RootStateOrAny ) => state.loggedState.logged );
 
-    console.log(logged);
 
     return (
         <>
-            {logged ? 'loggeado' : 'sinloggear'}
-            <button onClick={() =>  {dispatch(changeLoggedStatus(!logged))}}>
-                prueba
-            </button>            
+            {logged ?
+            <HomePage/>
+            :
+            <LandingPage/>
+            } 
+       
         </>
     )
 }

@@ -7,7 +7,7 @@ import Move from './components/Move'
 const AccountMoves: React.FC<AccountMovesProps> = ( props: AccountMovesProps ) => {
 
     return (
-        <div style={{ minHeight:'90vh',maxHeight: '100vh', backgroundColor: theme.mainColors.darkGray}}>
+        <div style={{ minHeight:'100%',maxHeight: '100vh', backgroundColor: theme.mainColors.darkGray}}>
             {props.moves.map( (move) => {
                 return <Move key={`${move.moveName}-${move.quantity}`} balance={move.balance} quantity={move.quantity} moveName={move.moveName}/>
             })}

@@ -8,6 +8,7 @@ interface SignUpProps {
     handleFormChange( booleanValue: boolean): void 
 }
 
+/*
 const generateWalletName = () => {
     let walletName = '';
     for (let i = 0; i < 16; i++ ) {
@@ -15,6 +16,7 @@ const generateWalletName = () => {
     }
     return walletName;
 }
+*/
 
 const SignUpForm: React.FC<SignUpProps> = ( props: SignUpProps) => {
 

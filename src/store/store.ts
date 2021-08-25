@@ -4,9 +4,9 @@ import walletSlice from '../reducers/walletSlice';
 import loggedSlice from '../reducers/loggedSlice';
 
 const reducer = combineReducers({
-    users: userSlice,
-    wallets: walletSlice,
-    logged: loggedSlice
+    usersList: userSlice,
+    walletsList: walletSlice,
+    loggedState: loggedSlice
 });
 
 const store = createStore(reducer);
