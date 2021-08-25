@@ -5,7 +5,7 @@ import { AccountMove } from './interfaces';
 
 const MoveContainer = styled.div<React.HTMLAttributes<HTMLDivElement>>`
     background-color: ${theme.mainColors.darkGray};
-    width: 100vw;
+    width: 100%;
     display: flex;
     flex-direction: row;
     align-items: center;

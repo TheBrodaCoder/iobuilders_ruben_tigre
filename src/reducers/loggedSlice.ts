@@ -15,24 +15,31 @@ interface loggedState {
     }
 }
 
+const initialState = {
+    logged: false,
+    loggedUser: {
+        FullName: '',
+        Email: '',
+        walletNumber: ''
+    }
+}
+
 const loggedSlice = createSlice({
     name: 'logged',
-    initialState: {
-        logged: false,
-        loggedUser: {
-            FullName: '',
-            Email: '',
-            walletNumber: ''
-        }
-    },
+    initialState,
     reducers: {
         changeLoggedStatus(state, action: PayloadAction<loggedState>){
 
             state.logged = action.payload.logged;
             state.loggedUser = action.payload.loggedUser;
         },
-        logOut(state, action: PayloadAction<boolean>){
-            state.logged = action.payload
+        logOut(state){
+            state.logged = false;
+            state.loggedUser =  {
+                FullName: '',
+                Email: '',
+                walletNumber: ''
+            }
         }
     }
 })

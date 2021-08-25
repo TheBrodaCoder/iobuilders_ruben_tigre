@@ -4,7 +4,8 @@ import theme from '../theme/theme';
 
 interface buttonProps extends ButtonHTMLAttributes<HTMLElement> {
     text: string,
-    label?: string
+    label?: string,
+    caution?: boolean
 }
 
 interface StyledButtonProps {
