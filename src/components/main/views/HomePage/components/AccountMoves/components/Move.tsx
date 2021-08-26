@@ -21,7 +21,7 @@ const Move: React.FC<AccountMove> = ( props: AccountMove ) => {
     return (
         <MoveContainer>
             <div style={{flexBasis: '50%', display: 'flex', flexDirection: 'row'}}>
-                <p style={{marginLeft:  '2em'}}><span style={{color: theme.mainColors.yellow, fontWeight:'bold'}}>Concepto: </span>{props.moveName}</p>
+                <p style={{marginLeft:  '2em'}}><span style={{color: theme.mainColors.yellow, fontWeight:'bold'}}>Concept: </span>{props.moveName}</p>
             </div>
             <div style={{flexBasis: '50%', display: 'flex', flexDirection: 'row-reverse'}}>
                 <div style={{display: 'flex', flexDirection: 'column', marginRight: '2em'}}>

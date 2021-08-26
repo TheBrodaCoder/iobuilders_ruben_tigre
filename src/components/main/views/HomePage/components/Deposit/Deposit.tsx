@@ -1,14 +1,13 @@
 import React, { useState } from 'react'
 import { Formik } from 'formik';
 import { RootStateOrAny, useDispatch, useSelector } from 'react-redux';
-import { UserType } from '../../../../../../reducers/userSlice';
 import Button from '../../../../../utils/button/Button';
 import TextInput from '../../../../../utils/TextInput/TextInput';
 import theme from '../../../../../utils/theme/theme';
 import * as yup from 'yup';
 import { FormToDisplay } from '../../HomePage';
 import { AccountMove } from '../AccountMoves/components/interfaces';
-import { addMovetoWallet, Wallet, AddMovePayload } from '../../../../../../reducers/walletSlice';
+import { addMovetoWallet, AddMovePayload } from '../../../../../../reducers/walletSlice';
 import SucessFullPrompt from '../SucessFullPrompt/SucessFullPrompt';
 
 

@@ -27,13 +27,14 @@ const validationSchema = yup.object().shape({
     Email: yup.string().email('Use a valid email address').required('Email is required'),
     FullName: yup.string().required('Your name is required').min(3, 'Your name length must be greater or equal than 3'),
     Password: yup.string().min(4, 'Password must at least 4 characters long').required('Password is required'),
-    ConfirmationPassword: yup.string().oneOf([yup.ref('password'), null], 'Passwords must match')
+    ConfirmPassword: yup.string().required().oneOf([yup.ref('Password')], 'Passwords must match')
 })
 
 const SignUpForm: React.FC<SignUpProps> = ( props: SignUpProps) => {
 
     const dispatch = useDispatch();
     const usersList = useSelector( (state: RootStateOrAny) => state.usersList.users);
+
     
     return (
         <Formik
@@ -45,7 +46,8 @@ const SignUpForm: React.FC<SignUpProps> = ( props: SignUpProps) => {
             }}
             onSubmit={(values, { setFieldError }) => {
                 const loggedUser: loggedUser = usersList.find((user: UserType) => user.Email.toUpperCase() === values.Email.toUpperCase() );
-                
+                if (values.ConfirmPassword !== values.Password) setFieldError('ConfirmPassword', 'Email already exists');
+
                 if (!loggedUser) {
                     const walletNumber = generateWalletName();
                     const newUser: UserType = {
@@ -56,9 +58,7 @@ const SignUpForm: React.FC<SignUpProps> = ( props: SignUpProps) => {
                     }
                     dispatch(register(newUser));
                     dispatch(createWallet(newUser.WalletNumber));
-                    
-                    dispatch(changeLoggedStatus( {logged: true, loggedUser: { Email: newUser.Email, WalletNumber: newUser.WalletNumber, FullName: newUser.FullName } } ))
-                    
+                    dispatch(changeLoggedStatus( {logged: true, loggedUser: { Email: newUser.Email, WalletNumber: newUser.WalletNumber, FullName: newUser.FullName }} ))
                 } else {
                     setFieldError('Email', 'Email already exists')
                 }

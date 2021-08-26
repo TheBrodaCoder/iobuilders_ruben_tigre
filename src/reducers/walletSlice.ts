@@ -29,28 +29,31 @@ const initialWallets: WalletState = {
         {
             WalletNumber: 'wallet-id-generated',
             walletMoves: [
-                { balance: 0, quantity: 50, moveName: 'Ingreso carlos' },
-                { balance: 65, quantity: 15, moveName: 'bizum lucia' },
-                { balance: 45, quantity: -20, moveName: 'mercadona' },
-                { balance: 20, quantity: -25, moveName: 'cena'}
+                { balance: 0, quantity: 0, moveName: 'Welcome Ruben Tigre' },
+                { balance: 0, quantity: 50, moveName: 'Ruben Tigre deposit' },
+                { balance: 65, quantity: 15, moveName: 'Payment for Lorena"s gift' },
+                { balance: 45, quantity: -20, moveName: 'SuperMarket Ticket' },
+                { balance: 20, quantity: -25, moveName: 'Expensive Dinner'}
             ]
         },
         {
             WalletNumber: 'wallet-id-generated-1',
             walletMoves: [
-                { balance: 0, quantity: 50, moveName: 'Ingreso carlos' },
-                { balance: 65, quantity: 15, moveName: 'bizum lucia' },
-                { balance: 45, quantity: -20, moveName: 'mercadona' },
-                { balance: 20, quantity: -25, moveName: 'cena'}
+                { balance: 0, quantity: 0, moveName: 'Welcome User Test' },
+                { balance: 0, quantity: 50, moveName: 'User Test deposit' },
+                { balance: 65, quantity: 15, moveName: 'Payment for beers' },
+                { balance: 45, quantity: -20, moveName: 'Gift to my boss' },
+                { balance: 20, quantity: -25, moveName: 'Expensive fidget-spinner'}
             ]
         },
         {
             WalletNumber: 'wallet-id-generated-2',
             walletMoves: [
-                { balance: 0, quantity: 50, moveName: 'Ingreso carlos' },
-                { balance: 65, quantity: 15, moveName: 'bizum lucia' },
-                { balance: 45, quantity: -20, moveName: 'mercadona' },
-                { balance: 20, quantity: -25, moveName: 'cena'}
+                { balance: 0, quantity: 0, moveName: 'Welcome User Test' },
+                { balance: 0, quantity: 50, moveName: 'User Test2 deposit' },
+                { balance: 65, quantity: 15, moveName: 'Payment for testing' },
+                { balance: 45, quantity: -20, moveName: 'Udemy course' },
+                { balance: 20, quantity: -25, moveName: 'Really expensive cheeto'}
             ]
         },
     ]

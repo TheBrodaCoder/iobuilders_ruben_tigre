@@ -29,7 +29,6 @@ const loggedSlice = createSlice({
     initialState,
     reducers: {
         changeLoggedStatus(state, action: PayloadAction<loggedState>){
-
             state.logged = action.payload.logged;
             state.loggedUser = action.payload.loggedUser;
         },

@@ -26,15 +26,15 @@ const initialUser: UsersList = {
             WalletNumber: 'wallet-id-generated'
         },
         {
-            Email: 'carlos@gmail.com',
-            Password: '4321',
-            FullName: 'Carlos R P',
+            Email: 'admin@gmail.com',
+            Password: '1111',
+            FullName: 'test user',
             WalletNumber: 'wallet-id-generated-2'
         },
         {
-            Email: 'jorge@gmail.com',
-            Password: '3333',
-            FullName: 'Jorge R O',
+            Email: 'test@gmail.com',
+            Password: '2222',
+            FullName: 'test user 2',
             WalletNumber: 'wallet-id-generated-3'
         }        
     ]
