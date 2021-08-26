@@ -2,7 +2,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { AccountMove } from '../components/main/views/HomePage/components/AccountMoves/components/interfaces';
 
 export interface Wallet {
-    walletNumber: string,
+    WalletNumber: string,
     walletMoves: Array<AccountMove>
 }
 
@@ -17,37 +17,40 @@ export interface AddMovePayload {
 
 
 
-const emptyWallet = {
-    walletNumber: '',
-            walletMoves: [
-                { balance: 0, quantity: 0, moveName: 'Welcome to TigerPay!' }
-            ]
+const emptyWallet: Wallet = {
+    WalletNumber: '',
+    walletMoves: [
+        { balance: 0, quantity: 0, moveName: 'Welcome to TigerPay!' }
+    ]
 };
 
 const initialWallets: WalletState = {
     wallets: [
         {
-            walletNumber: 'wallet-id-generated',
+            WalletNumber: 'wallet-id-generated',
             walletMoves: [
+                { balance: 0, quantity: 50, moveName: 'Ingreso carlos' },
+                { balance: 65, quantity: 15, moveName: 'bizum lucia' },
                 { balance: 45, quantity: -20, moveName: 'mercadona' },
-                { balance: 65, quantity: -15, moveName: 'bizum lucia' },
-                { balance: 0, quantity: 50, moveName: 'Ingreso carlos' }
+                { balance: 20, quantity: -25, moveName: 'cena'}
             ]
         },
         {
-            walletNumber: 'wallet-id-generated-1',
+            WalletNumber: 'wallet-id-generated-1',
             walletMoves: [
-                { balance: 95, quantity: -5, moveName: 'BurguerKing' },
-                { balance: 105, quantity: 10, moveName: 'Ingreso carlos' },
-                { balance: 70, quantity: -35, moveName: 'Regalo Lucia' }
+                { balance: 0, quantity: 50, moveName: 'Ingreso carlos' },
+                { balance: 65, quantity: 15, moveName: 'bizum lucia' },
+                { balance: 45, quantity: -20, moveName: 'mercadona' },
+                { balance: 20, quantity: -25, moveName: 'cena'}
             ]
         },
         {
-            walletNumber: 'wallet-id-generated-2',
+            WalletNumber: 'wallet-id-generated-2',
             walletMoves: [
-                { balance: 95, quantity: -5, moveName: 'BurguerKing' },
-                { balance: 105, quantity: 10, moveName: 'Ingreso carlos' },
-                { balance: 70, quantity: -35, moveName: 'Regalo Lucia' }
+                { balance: 0, quantity: 50, moveName: 'Ingreso carlos' },
+                { balance: 65, quantity: 15, moveName: 'bizum lucia' },
+                { balance: 45, quantity: -20, moveName: 'mercadona' },
+                { balance: 20, quantity: -25, moveName: 'cena'}
             ]
         },
     ]
@@ -58,14 +61,12 @@ const walletSlice = createSlice({
     initialState: initialWallets,
     reducers: {
         createWallet(state, action: PayloadAction<string>) {
-            const newWallet = {...emptyWallet, walletNumber: action.payload}
+            const newWallet = {...emptyWallet, WalletNumber: action.payload};
             state.wallets = [...state.wallets, newWallet];
         },
         addMovetoWallet(state, action: PayloadAction<AddMovePayload>) {
-            
-            state.wallets = state.wallets.map( wallet => {
-                return wallet.walletNumber === action.payload.walletTarget ? {...wallet, walletMoves: [...wallet.walletMoves, action.payload.move]} : wallet;
-            })
+            const changedWallet = state.wallets.findIndex((wallet: Wallet) => wallet.WalletNumber === action.payload.walletTarget);
+            state.wallets[changedWallet].walletMoves.push(action.payload.move); 
         }
     }
 })

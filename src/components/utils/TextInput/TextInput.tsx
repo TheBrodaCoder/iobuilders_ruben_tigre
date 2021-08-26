@@ -22,7 +22,7 @@ const TextInput = ({ name , ...props }: inputProps ): JSX.Element => {
                 error={showError}
                 {...props}
             />
-            {showError && <div style={{ marginTop: 5, color: 'red',fontSize: 12}}>{meta.error}</div>}
+            {showError && <div style={{ marginTop: 5, color: 'red', fontFamily: 'Roboto' }}>{meta.error}</div>}
         </>
     );
 };

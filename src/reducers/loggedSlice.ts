@@ -3,7 +3,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 export interface loggedUser {
     FullName: string,
     Email: string,
-    walletNumber: string
+    WalletNumber: string
 }
 
 interface loggedState {
@@ -11,7 +11,7 @@ interface loggedState {
     loggedUser: {
         FullName: string,
         Email: string,
-        walletNumber: string
+        WalletNumber: string
     }
 }
 
@@ -20,7 +20,7 @@ const initialState = {
     loggedUser: {
         FullName: '',
         Email: '',
-        walletNumber: ''
+        WalletNumber: ''
     }
 }
 
@@ -38,7 +38,7 @@ const loggedSlice = createSlice({
             state.loggedUser =  {
                 FullName: '',
                 Email: '',
-                walletNumber: ''
+                WalletNumber: ''
             }
         }
     }
