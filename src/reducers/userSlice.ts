@@ -20,7 +20,7 @@ export interface UsersList {
 const initialUser: UsersList = {
     users: [
         {
-            Email: 'donowenrt@gmail.com',
+            Email: 'tigre@gmail.com',
             Password: '1234',
             FullName: 'Ruben Tigre',
             WalletNumber: 'wallet-id-generated'

@@ -24,7 +24,7 @@ const Deposit = ({ setForm, balance } : DepositProps): JSX.Element => {
     const [congrats, changeCongrats] = useState<boolean>(false);
     
     const validationSchema = yup.object().shape({
-        Quantity: yup.number().required('The quantity is required').positive('Quantity must be positive').lessThan( balance, 'Insufficient funds in your account' ).typeError('Not valid quantity'),
+        Quantity: yup.number().required('The quantity is required').positive('Quantity must be positive').typeError('Not valid quantity'),
         CardNumber: yup.number().required('Card number is required').min(99999999999999, 'Not valid card').max(1000000000000000, 'Not valid card').typeError('Not valid card'),
         ExpireDate: yup.string().typeError('Not a valid date')
         .max(5, 'Not a valid date')
