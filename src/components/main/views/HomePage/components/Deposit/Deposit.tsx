@@ -8,7 +8,7 @@ import theme from '../../../../../utils/theme/theme';
 import * as yup from 'yup';
 import { FormToDisplay } from '../../HomePage';
 import { AccountMove } from '../AccountMoves/components/interfaces';
-import { addMovetoWallet, Wallet } from '../../../../../../reducers/walletSlice';
+import { addMovetoWallet, Wallet, AddMovePayload } from '../../../../../../reducers/walletSlice';
 import SucessFullPrompt from '../SucessFullPrompt/SucessFullPrompt';
 
 
@@ -20,25 +20,23 @@ interface DepositProps {
 const Deposit = ({ setForm, balance } : DepositProps): JSX.Element => {
 
     const dispatch = useDispatch();
-    const usersList = useSelector( (state: RootStateOrAny) => state.usersList.users);
-    const loggedUserEmail = useSelector( (state: RootStateOrAny) => state.loggedState.loggedUser.Email);
-    const walletList = useSelector( (state: RootStateOrAny) => state.walletsList.wallets);
+    const loggedUser = useSelector( (state: RootStateOrAny) => state.loggedState.loggedUser);
 
     const [congrats, changeCongrats] = useState<boolean>(false);
-
     
     const validationSchema = yup.object().shape({
-        Email: yup.string().email('Use a valid email address').required('Email is required'),
-        Quantity: yup.number().required('The quantity is required').positive('Quantity must be positive').lessThan( balance, 'Insufficient funds in your account' ) ,
-        Concept: yup.string().required('Concept are required').min(4, 'Your concept must be at least four letters or more'),
-        Password: yup.string().min(4, 'Password must at least 4 characters long').required('Password is required')
+        Quantity: yup.number().required('The quantity is required').positive('Quantity must be positive').lessThan( balance, 'Insufficient funds in your account' ).typeError('Not valid quantity'),
+        CardNumber: yup.number().required('Card number is required').min(99999999999999, 'Not valid card').max(1000000000000000, 'Not valid card').typeError('Not valid card'),
+        ExpireDate: yup.string().typeError('Not a valid date')
+        .max(5, 'Not a valid date')
+        .matches(
+          /([0-9]{2})\/([0-9]{2})/,
+          'Not a valid '
+        )
+        .required('Date is required'),
+        CVC: yup.number().moreThan(99, 'CVC Invalid').lessThan(1000, 'CVC Invalid').typeError('CVC Invalid')
     })
 
-    const verifyCredentials = ( password: string) => {
-        const userFinded = usersList.find((user: UserType) => user.Email.toUpperCase() === loggedUserEmail.toUpperCase());
-        const passwordAreIdentical = userFinded.Password === password;
-        return passwordAreIdentical;
-    }
 
     return ( 
         <>
@@ -48,38 +46,16 @@ const Deposit = ({ setForm, balance } : DepositProps): JSX.Element => {
             : 
             (<Formik
                 initialValues={{
-                    Email: '',
-                    Password: '',
-                    Quantity: 0,
-                    Concept: ''
+                    Quantity: 1,
+                    CardNumber: '',
+                    ExpireDate: '',
+                    CVC: ''
                 }}
-                onSubmit={(values, { setFieldError }) => {
-                    const targetEmail = values.Email;
-                    const targetQuantity = values.Quantity;
-                    const currentUser = usersList.find((user: UserType) => user.Email.toUpperCase() === loggedUserEmail.toUpperCase());
-    
-                    if (verifyCredentials( values.Password )){
-                        const targetUser = usersList.find( (user: UserType) => user.Email.toUpperCase() === targetEmail.toUpperCase() );
-                        if (targetUser.WalletNumber) {
-                            const targetWallet = walletList.find( (wallet: Wallet) => wallet.WalletNumber === targetUser.WalletNumber );
-                            const targetBalance = targetWallet.walletMoves[targetWallet.walletMoves.length - 1].balance;
-                            const currentWallet = walletList.find( (wallet: Wallet) => wallet.WalletNumber === currentUser.WalletNumber );
-                            
-                            const targetUserMove: AccountMove = { balance: Number(targetBalance) + Number(targetQuantity), moveName: values.Concept, quantity: targetQuantity };
-                            const currentUserMove: AccountMove = { balance: balance - targetQuantity, moveName: values.Concept, quantity: (0 - targetQuantity)}
-    
-                            dispatch(addMovetoWallet({ walletTarget: targetWallet.WalletNumber , move: targetUserMove }));
-                            dispatch(addMovetoWallet({ walletTarget: currentWallet.WalletNumber, move: currentUserMove }));
-
-                            changeCongrats(!congrats);
-    
-                        } else {
-                            setFieldError('Email', 'That user didnt exist')
-                        }
-    
-                    } else {
-                        setFieldError('Password', 'Password is not correct')
-                    }
+                onSubmit={(values) => {
+                    const depositMove: AccountMove = { balance: Number(balance) + Number(values.Quantity), moveName: `${loggedUser.FullName} deposit`, quantity: Number(values.Quantity) };
+                    const moveAction: AddMovePayload = { walletTarget: loggedUser.WalletNumber , move: depositMove  };
+                    dispatch(addMovetoWallet( moveAction ));
+                    changeCongrats(!congrats);
                 }}
                 validationSchema={validationSchema}
             >
@@ -100,36 +76,46 @@ const Deposit = ({ setForm, balance } : DepositProps): JSX.Element => {
                             }}
                         >
                             <TextInput 
-                                name='Email' 
-                                type='text' 
-                                value={values.Email}
-                                onChange={handleChange('Email')}
-                                placeholder='Email'
-                            />
-    
-                            <TextInput 
                                 name='Quantity' 
                                 type='text' 
                                 value={values.Quantity}
                                 onChange={handleChange('Quantity')}
                                 placeholder='Quantity'
                             />
-    
+
                             <TextInput 
-                                name='Concept' 
+                                name='CardNumber' 
                                 type='text' 
-                                value={values.Concept}
-                                onChange={handleChange('Concept')}
-                                placeholder='Concept'
+                                value={values.CardNumber}
+                                onChange={handleChange('CardNumber')}
+                                placeholder='Card number'
                             />
+                            <div style={{ display: 'flex', flexDirection: 'row', width: '87%', alignItems:'space-around'}}>
+                                <div style={{display: 'flex', flexDirection: 'column'}}>
+                                <TextInput 
+                                    name='ExpireDate' 
+                                    type='text' 
+                                    value={values.ExpireDate}
+                                    onChange={handleChange('ExpireDate')}
+                                    placeholder='MM/YY'
+                                    style={{width: '40%'}}
+                                />
+                                </div>
+                              
+                            <div style={{display: 'flex', flexDirection: 'column'}}>
+                                <TextInput 
+                                    name='CVC' 
+                                    type='CVC'
+                                    value={values.CVC}
+                                    onChange={handleChange('CVC')}
+                                    placeholder='CVC'
+                                    style={{width: '40%', marginLeft: '1em'}}
+                                /> 
+                            </div>
+                             
+                            </div>
     
-                            <TextInput 
-                                name='Password' 
-                                type='password'
-                                value={values.Password}
-                                onChange={handleChange('Password')}
-                                placeholder='Password'
-                            />
+                            
     
                             <div style={{ display: 'flex', justifyContent: 'space-around', width: '100%'}}>
                                 <Button caution text='Cancel' type='button' onClick={() => setForm('none') } />

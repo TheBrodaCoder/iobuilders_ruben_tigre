@@ -29,7 +29,7 @@ const Move: React.FC<AccountMove> = ( props: AccountMove ) => {
                         {props.quantity + '€'}
                     </div>
                     <div>
-                        {props.balance + '€'}
+                        {(props.balance - props.quantity) > 0 ? props.balance - props.quantity : 0  + '€'}
                     </div>
                 </div>
             </div>
