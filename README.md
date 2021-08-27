@@ -16,9 +16,9 @@ Please avoid entering sensitive data as far as possible.
 ## Users
 Although new users can be created, I have left a couple already created so that you can also test the login functionality from the beginning.
 
-email: tigre@gmail.com password: 1234,
-email: admin@gmail.com password: 1111,
-email: test@gmail.com password: 2222
+- email: tigre@gmail.com password: 1234,
+- email: admin@gmail.com password: 1111,
+- email: test@gmail.com password: 2222
 
 ## Forms
 
@@ -27,6 +27,7 @@ For the validation I used the yup library, because I wanted to learn how to use 
 
 ## Styles
 
+I have used Styled-Components to give colour and structure to the whole project. I have focused on web styles, mainly due to time constraints. Even with that, the panoramic view should help to make the page somewhat functional on a mobile.
 The styles are loosely optimised for non-computer screens, basically due to time constraints. Even with that, if you use panoramic view it will be decent.
 
 ## Conclusion
