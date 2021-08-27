@@ -1,6 +1,6 @@
 import React from 'react';
 import {ReactComponent as CheckMark} from './checked.svg'; 
-import theme from '../../../../../utils/theme/theme';
+import theme from '../../../../utils/theme/theme';
 
 const SucessFullPrompt = () => {
     return (

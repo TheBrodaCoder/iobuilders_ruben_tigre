@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components';
-import theme from '../../../../../../utils/theme/theme';
+import theme from '../../../../../utils/theme/theme';
 import { AccountMove } from './interfaces';
 
 const MoveContainer = styled.div<React.HTMLAttributes<HTMLDivElement>>`

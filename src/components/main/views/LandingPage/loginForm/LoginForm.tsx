@@ -1,5 +1,4 @@
 import React from 'react';
-import theme from '../../../../utils/theme/theme';
 import TextInput from '../../../../utils/TextInput/TextInput';
 import { Formik } from 'formik';
 import Button from '../../../../utils/button/Button';
@@ -7,7 +6,8 @@ import * as yup from 'yup';
 import { RootStateOrAny, useDispatch, useSelector } from 'react-redux';
 import { UserType } from '../../../../../reducers/userSlice';
 import { changeLoggedStatus, loggedUser } from '../../../../../reducers/loggedSlice';
-
+import StyledForm from '../../../../utils/StyledForm/StyledForm';
+import RowButton from '../../../../utils/RowButton/RowButton';
 
 const validationSchema = yup.object().shape({
     Email: yup.string().email('Use a valid email address').required('Email is required'),
@@ -48,19 +48,11 @@ const LoginForm: React.FC<LoginFormProps> = ( props: LoginFormProps ): JSX.Eleme
 
             
 
-            return (<form 
-                        onSubmit={handleSubmit}
-                        style={{
-                            backgroundColor: theme.mainColors.white, 
-                            minHeight: '30vh', 
-                            minWidth: '25vw',
-                            marginTop: '20vh',
-                            borderRadius: '0.5em',
-                            display: 'flex',
-                            flexDirection: 'column',
-                            alignItems: 'center',
-                        }}
-                    >
+            return (
+                <StyledForm
+                    onSubmit={handleSubmit}
+                    style={{marginTop: '25vh'}}
+                >
                         <TextInput 
                             name='Email' 
                             type='text' 
@@ -77,11 +69,11 @@ const LoginForm: React.FC<LoginFormProps> = ( props: LoginFormProps ): JSX.Eleme
                         />
 
 
-                        <div style={{ display: 'flex', justifyContent: 'space-around', width: '100%'}}>
+                        <RowButton>
                             <Button text='Sign up!' type='button' onClick={() => {props.handleFormChange(false)}} label='If you have no account'/>
                             <Button text='Log in!' type='submit' label={ "If you're already signed"} />
-                        </div>
-                    </form>
+                        </RowButton>
+                    </StyledForm>
                     );
                 }
             }

@@ -1,23 +1,28 @@
 import React, { useState } from 'react'
 import { Formik } from 'formik';
 import { RootStateOrAny, useDispatch, useSelector } from 'react-redux';
-import { UserType } from '../../../../../../reducers/userSlice';
-import Button from '../../../../../utils/button/Button';
-import TextInput from '../../../../../utils/TextInput/TextInput';
-import theme from '../../../../../utils/theme/theme';
+import { UserType } from '../../../../../reducers/userSlice';
+import Button from '../../../../utils/button/Button';
+import TextInput from '../../../../utils/TextInput/TextInput';
 import * as yup from 'yup';
-import { FormToDisplay } from '../../HomePage';
+import { FormToDisplay } from '../HomePage';
 import { AccountMove } from '../AccountMoves/components/interfaces';
-import { addMovetoWallet, Wallet } from '../../../../../../reducers/walletSlice';
+import { addMovetoWallet, Wallet } from '../../../../../reducers/walletSlice';
 import SucessFullPrompt from '../SucessFullPrompt/SucessFullPrompt';
+import StyledForm from '../../../../utils/StyledForm/StyledForm';
+import PromptText from '../helpComponents/PromptText';
+import PromptContainer from '../helpComponents/PromptContainer';
+import RowButton from '../../../../utils/RowButton/RowButton';
+
 
 
 interface PayProps {
     setForm(formToShow: FormToDisplay): void,
-    balance: number
+    balance: number,
+    title?: string
 }
 
-const Pay = ({ setForm, balance } : PayProps): JSX.Element => {
+const Pay = ({ setForm, balance, title } : PayProps): JSX.Element => {
 
     const dispatch = useDispatch();
     const usersList = useSelector( (state: RootStateOrAny) => state.usersList.users);
@@ -41,7 +46,10 @@ const Pay = ({ setForm, balance } : PayProps): JSX.Element => {
     }
 
     return ( 
-        <>
+        <PromptContainer>
+            <PromptText>
+                {title}
+            </PromptText>
         {
             congrats ?  
             <SucessFullPrompt/>
@@ -87,17 +95,8 @@ const Pay = ({ setForm, balance } : PayProps): JSX.Element => {
     
                 
     
-                return (<form 
+                return (<StyledForm
                             onSubmit={handleSubmit}
-                            style={{
-                                backgroundColor: theme.mainColors.white, 
-                                minHeight: '30vh', 
-                                minWidth: '20vw',
-                                borderRadius: '0.5em',
-                                display: 'flex',
-                                flexDirection: 'column',
-                                alignItems: 'center',
-                            }}
                         >
                             <TextInput 
                                 name='Email' 
@@ -131,16 +130,19 @@ const Pay = ({ setForm, balance } : PayProps): JSX.Element => {
                                 placeholder='Password'
                             />
     
-                            <div style={{ display: 'flex', justifyContent: 'space-around', width: '100%'}}>
+                            <RowButton>
                                 <Button caution text='Cancel' type='button' onClick={() => setForm('none') } />
                                 <Button text='Send payment!' type='submit' />
-                            </div>
-                        </form>
+                            </RowButton>
+                        </StyledForm>
                         );
                     }
                 }
             </Formik>)};
-        </>)
+        
+    </PromptContainer>
+        
+        )
     }
 
 export default Pay

@@ -1,5 +1,5 @@
 import React from 'react'
-import theme from '../../../../../utils/theme/theme'
+import theme from '../../../../utils/theme/theme'
 import { AccountMovesProps } from './components/interfaces'
 import Move from './components/Move'
 

@@ -1,22 +1,27 @@
 import React, { useState } from 'react'
 import { Formik } from 'formik';
 import { RootStateOrAny, useDispatch, useSelector } from 'react-redux';
-import Button from '../../../../../utils/button/Button';
-import TextInput from '../../../../../utils/TextInput/TextInput';
-import theme from '../../../../../utils/theme/theme';
+import Button from '../../../../utils/button/Button';
+import TextInput from '../../../../utils/TextInput/TextInput';
 import * as yup from 'yup';
-import { FormToDisplay } from '../../HomePage';
+import { FormToDisplay } from '../HomePage';
 import { AccountMove } from '../AccountMoves/components/interfaces';
-import { addMovetoWallet, AddMovePayload } from '../../../../../../reducers/walletSlice';
+import { addMovetoWallet, AddMovePayload } from '../../../../../reducers/walletSlice';
 import SucessFullPrompt from '../SucessFullPrompt/SucessFullPrompt';
+import StyledForm from '../../../../utils/StyledForm/StyledForm';
+import PromptContainer from '../helpComponents/PromptContainer';
+import PromptText from '../helpComponents/PromptText';
+import RowButton from '../../../../utils/RowButton/RowButton';
+import { InputRows, RowSpace } from './DepositContainer/DepositContainers';
 
 
 interface DepositProps {
     setForm(formToShow: FormToDisplay): void,
-    balance: number
+    balance: number,
+    title?: string
 }
 
-const Deposit = ({ setForm, balance } : DepositProps): JSX.Element => {
+const Deposit = ({ setForm, balance, title } : DepositProps): JSX.Element => {
 
     const dispatch = useDispatch();
     const loggedUser = useSelector( (state: RootStateOrAny) => state.loggedState.loggedUser);
@@ -38,7 +43,10 @@ const Deposit = ({ setForm, balance } : DepositProps): JSX.Element => {
 
 
     return ( 
-        <>
+        <PromptContainer>
+            <PromptText>
+                {title}
+            </PromptText>
         {
             congrats ?  
             <SucessFullPrompt/>
@@ -62,17 +70,8 @@ const Deposit = ({ setForm, balance } : DepositProps): JSX.Element => {
     
                 
     
-                return (<form 
-                            onSubmit={handleSubmit}
-                            style={{
-                                backgroundColor: theme.mainColors.white, 
-                                minHeight: '30vh', 
-                                minWidth: '20vw',
-                                borderRadius: '0.5em',
-                                display: 'flex',
-                                flexDirection: 'column',
-                                alignItems: 'center',
-                            }}
+                return (<StyledForm
+                    onSubmit={handleSubmit}
                         >
                             <TextInput 
                                 name='Quantity' 
@@ -89,8 +88,8 @@ const Deposit = ({ setForm, balance } : DepositProps): JSX.Element => {
                                 onChange={handleChange('CardNumber')}
                                 placeholder='Card number'
                             />
-                            <div style={{ display: 'flex', flexDirection: 'row', width: '87%', alignItems:'space-around'}}>
-                                <div style={{display: 'flex', flexDirection: 'column'}}>
+                            <InputRows>
+                                <RowSpace>
                                 <TextInput 
                                     name='ExpireDate' 
                                     type='text' 
@@ -99,33 +98,29 @@ const Deposit = ({ setForm, balance } : DepositProps): JSX.Element => {
                                     placeholder='MM/YY'
                                     style={{width: '40%'}}
                                 />
-                                </div>
-                              
-                            <div style={{display: 'flex', flexDirection: 'column'}}>
-                                <TextInput 
-                                    name='CVC' 
-                                    type='CVC'
-                                    value={values.CVC}
-                                    onChange={handleChange('CVC')}
-                                    placeholder='CVC'
-                                    style={{width: '40%', marginLeft: '1em'}}
-                                /> 
-                            </div>
-                             
-                            </div>
+                                </RowSpace>
+                                <RowSpace>
+                                    <TextInput 
+                                        name='CVC' 
+                                        type='CVC'
+                                        value={values.CVC}
+                                        onChange={handleChange('CVC')}
+                                        placeholder='CVC'
+                                        style={{width: '40%'}}
+                                    /> 
+                                </RowSpace>
+                            </InputRows>
     
-                            
-    
-                            <div style={{ display: 'flex', justifyContent: 'space-around', width: '100%'}}>
+                            <RowButton>
                                 <Button caution text='Cancel' type='button' onClick={() => setForm('none') } />
                                 <Button text='Send payment!' type='submit' />
-                            </div>
-                        </form>
+                            </RowButton>
+                        </StyledForm>
                         );
                     }
                 }
             </Formik>)};
-        </>)
+        </PromptContainer>)
     }
 
 export default Deposit;

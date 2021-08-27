@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import AccountBalance from './components/AccountBalance/AccountBalance';
-import AccountMoves from './components/AccountMoves/AccountMoves';
+import AccountBalance from './AccountBalance/AccountBalance';
+import AccountMoves from './AccountMoves/AccountMoves';
 import { useSelector, RootStateOrAny } from 'react-redux';
 import { Wallet } from '../../../../reducers/walletSlice';
-import { AccountMove } from './components/AccountMoves/components/interfaces';
-import NavBar from './components/NavBar/NavBar';
-import theme from '../../../utils/theme/theme';
-import Pay from './components/Pay/Pay';
-import Deposit from './components/Deposit/Deposit';
+import { AccountMove } from './AccountMoves/components/interfaces';
+import NavBar from './NavBar/NavBar';
+import Pay from './Pay/Pay';
+import Deposit from './Deposit/Deposit';
+import { HomePageContainer, HomePageContent, AccountDetails } from './helpComponents/HomePageContainers';
 
 
 export type FormToDisplay = 'none' | 'pay' | 'deposit' ;
@@ -27,36 +27,23 @@ const HomePage = () => {
         }, [walletList])
 
     return (
-
-        <div style={{display: 'flex', flexDirection:'column', height: '100%'}} >
+        <HomePageContainer>
             <NavBar setForm={setformDisplayed} />
-            <div style={{display: 'flex', flexDirection:'row', height: '100%', transitionDuration: '2s'}}>
-                <div style={{display: 'flex', flexDirection:'column', alignItems: 'center', overflow: 'hidden', flexGrow: 1 }}>
+            <HomePageContent>
+                <AccountDetails>
                     <AccountBalance balance={balance}/>
                     <AccountMoves moves={moves}/>
-                </div>
+                </AccountDetails>
                 {formDisplayed === 'none' ? 
                     null     
                 : 
                 (formDisplayed === 'pay' ?
-                    <div style={{ minWidth: '30%', maxWidth: '35%', backgroundColor: theme.mainColors.blue, display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
-                        <div style={{marginBottom: '2em', color: theme.mainColors.white, fontFamily: 'Roboto', fontSize: '2.4em'}}>
-                            Send a Payment
-                        </div>
-                        <Pay setForm={ setformDisplayed } balance={balance}/>
-                    </div> 
-                    : 
-                    <div style={{ minWidth: '30%', maxWidth: '35%', backgroundColor: theme.mainColors.blue, display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
-                        <div style={{marginBottom: '2em', color: theme.mainColors.white, fontFamily: 'Roboto', fontSize: '2.4em', alignSelf: 'center'}}>
-                            Deposit
-                        </div>
-                        <Deposit setForm={ setformDisplayed } balance={balance}/>
-                    </div>
+                    <Pay setForm={ setformDisplayed } balance={balance} title='Send a payment'/>
+                    :
+                    <Deposit setForm={ setformDisplayed } balance={balance} title='Deposit'/>
                 )}
-            </div>
-        </div>
-        
-        
+            </HomePageContent>
+        </HomePageContainer>
     )
 };
 

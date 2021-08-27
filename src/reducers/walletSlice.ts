@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { AccountMove } from '../components/main/views/HomePage/components/AccountMoves/components/interfaces';
+import { AccountMove } from '../components/main/views/HomePage/AccountMoves/components/interfaces';
 
 export interface Wallet {
     WalletNumber: string,

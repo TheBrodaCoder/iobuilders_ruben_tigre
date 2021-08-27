@@ -1,5 +1,4 @@
 import React from 'react';
-import theme from '../../../../utils/theme/theme';
 import TextInput from '../../../../utils/TextInput/TextInput';
 import { Formik } from 'formik';
 import Button from '../../../../utils/button/Button';
@@ -8,6 +7,9 @@ import { changeLoggedStatus, loggedUser } from '../../../../../reducers/loggedSl
 import { register, UserType } from '../../../../../reducers/userSlice';
 import * as yup from 'yup';
 import { createWallet } from '../../../../../reducers/walletSlice';
+import StyledForm from '../../../../utils/StyledForm/StyledForm';
+import RowButton from '../../../../utils/RowButton/RowButton';
+
 
 interface SignUpProps {
     handleFormChange( booleanValue: boolean): void 
@@ -66,18 +68,10 @@ const SignUpForm: React.FC<SignUpProps> = ( props: SignUpProps) => {
             validationSchema = { validationSchema }
         >
                        {({values, handleSubmit, handleChange }) => {
-                           return (<form 
-                                onSubmit={handleSubmit}
-                                style={{
-                                    backgroundColor: theme.mainColors.white, 
-                                    minHeight: '30vh', 
-                                    minWidth: '25vw',
-                                    marginTop: '25vh',
-                                    borderRadius: '0.5em',
-                                    display: 'flex',
-                                    flexDirection: 'column',
-                                    alignItems: 'center',
-                                }}
+                           return (
+                            <StyledForm
+                            onSubmit={handleSubmit}
+                            style={{marginTop: '25vh'}}
                             >
                                 <TextInput 
                                     name='Email' 
@@ -107,11 +101,11 @@ const SignUpForm: React.FC<SignUpProps> = ( props: SignUpProps) => {
                                     onChange={handleChange('ConfirmPassword')}
                                     placeholder='Confirm password'
                                 />
-                                <div style={{ display: 'flex', justifyContent: 'space-around', width: '100%'}}>
+                                <RowButton>
                                     <Button text='Log in!' type='button' label="If you're already signed" onClick={() => props.handleFormChange(true)}/>
                                     <Button text='Sign up!' type='submit' label='If you have no account'/>
-                                </div>
-                            </form>
+                                </RowButton>
+                            </StyledForm>
                            );
                         }
                     }

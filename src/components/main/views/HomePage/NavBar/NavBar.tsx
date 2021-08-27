@@ -1,10 +1,10 @@
 import React from 'react'
 import styled from 'styled-components';
-import Button from '../../../../../utils/button/Button';
-import theme from '../../../../../utils/theme/theme';
-import { FormToDisplay } from '../../HomePage';
+import Button from '../../../../utils/button/Button';
+import theme from '../../../../utils/theme/theme';
+import { FormToDisplay } from '../HomePage';
 import { useDispatch } from 'react-redux';
-import { logOut } from '../../../../../../reducers/loggedSlice';
+import { logOut } from '../../../../../reducers/loggedSlice';
 
 const NavContainer = styled.div<React.HTMLAttributes<HTMLDivElement>>`
     background-color: ${theme.mainColors.darkBlue};
