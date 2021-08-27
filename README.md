@@ -28,7 +28,7 @@ For the validation I used the yup library, because I wanted to learn how to use 
 ## Styles
 
 I have used Styled-Components to give colour and structure to the whole project. I have focused on web styles, mainly due to time constraints. Even with that, the panoramic view should help to make the page somewhat functional on a mobile.
-The styles are loosely optimised for non-computer screens, basically due to time constraints. Even with that, if you use panoramic view it will be decent.
+
 
 ## Conclusion
 
